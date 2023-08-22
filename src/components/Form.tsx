@@ -33,8 +33,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="service-name-input"
-          value={serviceNameInput}
-          onChange={({ target: { value } }) => setServiceNameInput(value)}
+          value={ serviceNameInput }
+          onChange={ ({ target: { value } }) => setServiceNameInput(value) }
         />
       </div>
       <div>
@@ -42,8 +42,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="login-input"
-          value={loginInput}
-          onChange={({ target: { value } }) => setLoginInput(value)}
+          value={ loginInput }
+          onChange={ ({ target: { value } }) => setLoginInput(value) }
         />
       </div>
       <div>
@@ -51,8 +51,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="password"
           id="password-input"
-          value={passwordInput}
-          onChange={({ target: { value } }) => setPasswordInput(value)}
+          value={ passwordInput }
+          onChange={ ({ target: { value } }) => setPasswordInput(value) }
         />
       </div>
       <div>
@@ -60,8 +60,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="url-input"
-          value={urlInput}
-          onChange={({ target: { value } }) => setUrlInput(value)}
+          value={ urlInput }
+          onChange={ ({ target: { value } }) => setUrlInput(value) }
         />
       </div>
 
