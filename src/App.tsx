@@ -9,6 +9,7 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [showRegister, setShowRegister] = useState(true);
   const [showPassword, setShowPassword] = useState<FormInputType[]>([]);
+  const [hidePasswords, SetHidePasswords] = useState(false);
 
   const handleFormRegister = () => {
     setShowForm(!showForm);
@@ -47,6 +48,12 @@ function App() {
         && <NewButton handleClick={ handleFormRegister }>Cadastrar nova senha</NewButton>}
       {showForm
         && <Form handleClick={ handleDelete } passwordAdd={ handlePasswordNewAdd } />}
+      <label htmlFor="hidePassword">Esconder senhas</label>
+      <input
+        type="checkbox"
+        id="hidePassword"
+        onChange={ () => SetHidePasswords(!hidePasswords) }
+      />
       <fieldset>
         {showPassword.length > 0 ? (
           showPassword.map((password) => (
@@ -55,7 +62,7 @@ function App() {
                 {password.service}
               </a>
               <p>{password.login}</p>
-              <p>{password.password}</p>
+              <p>{hidePasswords ? '******' : password.password}</p>
               <button
                 data-testid="remove-btn"
                 onClick={ () => handlePasswordDelete(
