@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { FormProps } from '../types';
+import { FormProps, FormInputType } from '../types';
 
-function Form({ handleClick }: FormProps) {
+function Form({ handleClick, passwordAdd }: FormProps) {
   const [serviceNameInput, setServiceNameInput] = useState('');
   const [loginInput, setLoginInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -25,6 +25,21 @@ function Form({ handleClick }: FormProps) {
     && passwordHaveLetter
     && passwordHaveNumber
     && passwordHaveSpecialChar;
+
+  function handlePasswordInput() {
+    const newPassword: FormInputType = {
+      service: serviceNameInput,
+      login: loginInput,
+      password: passwordInput,
+      url: urlInput,
+    };
+    passwordAdd(newPassword);
+    setServiceNameInput('');
+    setLoginInput('');
+    setPasswordInput('');
+    setUrlInput('');
+    handleClick();
+  }
 
   return (
     <form>
@@ -104,6 +119,7 @@ function Form({ handleClick }: FormProps) {
       <div>
         <button
           disabled={ !validatingForm }
+          onClick={ handlePasswordInput }
         >
           Cadastrar
         </button>
