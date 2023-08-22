@@ -1,6 +1,28 @@
+import { useState } from 'react';
+import { formatPostcssSourceMap } from 'vite';
 import { FormProps } from '../types';
 
 function Form({ handleClick }: FormProps) {
+  const [serviceNameInput, setServiceNameInput] = useState('');
+  const [loginInput, setLoginInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [urlInput, setUrlInput] = useState('');
+
+  const regex = /^(?=(?:.*?[A-Z]){1})(?=(?:.*?[0-9]){1})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]*$/;
+
+  const haveLetter = regex.test(passwordInput);
+  const haveNumber = regex.test(passwordInput);
+  const haveSpecialChar = regex.test(passwordInput);
+
+  const validatingForm = serviceNameInput.length >= 0
+    && loginInput.length >= 0
+    && passwordInput.length >= 8
+    && passwordInput.length <= 16
+    && urlInput.length >= 0
+    && haveLetter
+    && haveNumber
+    && haveSpecialChar;
+
   return (
     <form>
       <div>
@@ -8,6 +30,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="service-name-input"
+          value={ serviceNameInput }
+          onChange={ ({ target: { value } }) => setServiceNameInput(value) }
         />
       </div>
       <div>
@@ -15,6 +39,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="login-input"
+          value={ loginInput }
+          onChange={ ({ target: { value } }) => setLoginInput(value) }
         />
       </div>
       <div>
@@ -22,6 +48,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="password"
           id="password-input"
+          value={ passwordInput }
+          onChange={ ({ target: { value } }) => setPasswordInput(value) }
         />
       </div>
       <div>
@@ -29,10 +57,14 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="url-input"
+          value={ urlInput }
+          onChange={ ({ target: { value } }) => setUrlInput(value) }
         />
       </div>
       <div>
-        <button>
+        <button
+          disabled={ !validatingForm }
+        >
           Cadastrar
         </button>
         <button onClick={ handleClick }>
