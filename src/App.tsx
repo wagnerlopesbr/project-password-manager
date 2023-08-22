@@ -8,24 +8,19 @@ function App() {
   const [showForm, setShowForm] = useState(false);
   const [showRegister, setShowRegister] = useState(true);
 
-  function handleFormRegister() {
-    setShowForm(true);
+  const handleFormRegister = () => {
+    setShowForm(!showForm);
     setShowRegister(false);
-  }
+  };
 
-  function handleDelete() {
+  const handleDelete = () => {
     setShowForm(false);
     setShowRegister(true);
-  }
+  };
 
   return (
     <>
       <Header />
-      {/* {showRegister
-        && <NewButton onClick={ handleFormRegister }>
-          Cadastrar nova senha
-        </NewButton>}
-      {showForm && <Form onClick={ handleDelete } />} */}
       {showRegister
         ? <NewButton handleClick={ handleFormRegister }>Cadastrar nova senha</NewButton>
         : <Form handleClick={ handleDelete } />}
