@@ -7,17 +7,24 @@ function Form({ handleClick }: FormProps) {
   const [passwordInput, setPasswordInput] = useState('');
   const [urlInput, setUrlInput] = useState('');
 
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+  const letterRegex = /[A-Za-z]/;
+  const numberRegex = /\d/;
+  const specialCharRegex = /[@$!%*?&]/;
 
-  const passwordHaveLetterNumberSpecialChar = regex.test(passwordInput);
-  console.log(passwordHaveLetterNumberSpecialChar);
+  const passwordHaveLetter = letterRegex.test(passwordInput);
+  const passwordHaveNumber = numberRegex.test(passwordInput);
+  const passwordHaveSpecialChar = specialCharRegex.test(passwordInput);
+  const validPassword = 'valid-password-check';
+  const invalidPassword = 'invalid-password-check';
 
   const validatingForm = serviceNameInput.length > 0
     && loginInput.length > 0
     && passwordInput.length >= 8
     && passwordInput.length <= 16
     && urlInput.length > 0
-    && passwordHaveLetterNumberSpecialChar;
+    && passwordHaveLetter
+    && passwordHaveNumber
+    && passwordHaveSpecialChar;
 
   return (
     <form>
@@ -26,8 +33,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="service-name-input"
-          value={ serviceNameInput }
-          onChange={ ({ target: { value } }) => setServiceNameInput(value) }
+          value={serviceNameInput}
+          onChange={({ target: { value } }) => setServiceNameInput(value)}
         />
       </div>
       <div>
@@ -35,8 +42,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="login-input"
-          value={ loginInput }
-          onChange={ ({ target: { value } }) => setLoginInput(value) }
+          value={loginInput}
+          onChange={({ target: { value } }) => setLoginInput(value)}
         />
       </div>
       <div>
@@ -44,8 +51,8 @@ function Form({ handleClick }: FormProps) {
         <input
           type="password"
           id="password-input"
-          value={ passwordInput }
-          onChange={ ({ target: { value } }) => setPasswordInput(value) }
+          value={passwordInput}
+          onChange={({ target: { value } }) => setPasswordInput(value)}
         />
       </div>
       <div>
@@ -53,10 +60,47 @@ function Form({ handleClick }: FormProps) {
         <input
           type="text"
           id="url-input"
-          value={ urlInput }
-          onChange={ ({ target: { value } }) => setUrlInput(value) }
+          value={urlInput}
+          onChange={({ target: { value } }) => setUrlInput(value)}
         />
       </div>
+
+      <section>
+        <p>Sua senha deve:</p>
+        <div>
+          <p
+            className={ passwordInput.length >= 8 ? validPassword : invalidPassword }
+          >
+            Possuir 8 ou mais caracteres
+          </p>
+        </div>
+        <div>
+          <p
+            className={ passwordHaveNumber && passwordHaveLetter
+              ? validPassword : invalidPassword }
+          >
+            Possuir letras e números
+          </p>
+        </div>
+        <div>
+          <p
+            className={ passwordHaveSpecialChar ? validPassword : invalidPassword }
+          >
+            Possuir algum caractere especial
+          </p>
+        </div>
+        <div>
+          <p
+            className={
+              passwordInput.length >= 8 && passwordInput.length <= 16
+                ? validPassword : invalidPassword
+              }
+          >
+            Possuir até 16 caracteres
+          </p>
+        </div>
+      </section>
+
       <div>
         <button
           disabled={ !validatingForm }
