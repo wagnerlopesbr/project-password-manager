@@ -9,18 +9,18 @@ function Form({ handleClick }: FormProps) {
 
   const regex = /^(?=(?:.*?[A-Z]){1})(?=(?:.*?[0-9]){1})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]*$/;
 
-  const haveLetter = regex.test(passwordInput);
-  const haveNumber = regex.test(passwordInput);
-  const haveSpecialChar = regex.test(passwordInput);
+  const passwordHaveLetter = regex.test(passwordInput);
+  const passwordHaveNumber = regex.test(passwordInput);
+  const passwordHaveSpecialChar = regex.test(passwordInput);
 
-  const validatingForm = serviceNameInput.length >= 0
-    && loginInput.length >= 0
+  const validatingForm = serviceNameInput.length > 0
+    && loginInput.length > 0
     && passwordInput.length >= 8
     && passwordInput.length <= 16
-    && urlInput.length >= 0
-    && haveLetter
-    && haveNumber
-    && haveSpecialChar;
+    && urlInput.length > 0
+    && passwordHaveLetter
+    && passwordHaveNumber
+    && passwordHaveSpecialChar;
 
   return (
     <form>
