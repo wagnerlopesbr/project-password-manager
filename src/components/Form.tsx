@@ -1,4 +1,6 @@
-function Form() {
+import { FormProps } from '../types';
+
+function Form({ handleClick }: FormProps) {
   return (
     <form>
       <div>
@@ -33,7 +35,7 @@ function Form() {
         <button>
           Cadastrar
         </button>
-        <button>
+        <button onClick={ handleClick }>
           Cancelar
         </button>
       </div>
