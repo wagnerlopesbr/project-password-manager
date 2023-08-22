@@ -47,20 +47,32 @@ function App() {
         && <NewButton handleClick={ handleFormRegister }>Cadastrar nova senha</NewButton>}
       {showForm
         && <Form handleClick={ handleDelete } passwordAdd={ handlePasswordNewAdd } />}
-      {showPassword.length > 0 ? (
-        showPassword.map((password) => (
-          <div key={ password.password }>
-            <a href={ password.url } target="_blank" rel="noopener noreferrer">
-              {password.service}
-            </a>
-            <p>{password.login}</p>
-            <p>{password.password}</p>
-          </div>
-        ))
-      ) : (
-        <p>Nenhuma senha cadastrada</p>
-      )}
-
+      <fieldset>
+        {showPassword.length > 0 ? (
+          showPassword.map((password) => (
+            <div key={ password.password }>
+              <a href={ password.url } target="_blank" rel="noopener noreferrer">
+                {password.service}
+              </a>
+              <p>{password.login}</p>
+              <p>{password.password}</p>
+              <button
+                data-testid="remove-btn"
+                onClick={ () => handlePasswordDelete(
+                  password.service,
+                  password.login,
+                  password.password,
+                  password.url,
+                ) }
+              >
+                Remover
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>Nenhuma senha cadastrada</p>
+        )}
+      </fieldset>
     </>
   );
 }
