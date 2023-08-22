@@ -7,7 +7,7 @@ function Form({ handleClick }: FormProps) {
   const [passwordInput, setPasswordInput] = useState('');
   const [urlInput, setUrlInput] = useState('');
 
-  const regex = /^(?=(?:.*?[A-Z]){1})(?=(?:.*?[0-9]){1})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]*$/;
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
 
   const passwordHaveLetterNumberSpecialChar = regex.test(passwordInput);
   console.log(passwordHaveLetterNumberSpecialChar);
